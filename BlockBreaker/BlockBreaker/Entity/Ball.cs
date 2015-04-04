@@ -4,6 +4,7 @@ using Atom.Entity;
 using Atom.Graphics.Rendering;
 using Atom.Input;
 using Atom.Physics;
+using Atom.Physics.Collision;
 using Atom.Physics.Collision.BoundingBox;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,7 +43,13 @@ namespace BlockBreaker.Entity
                     Location = new Point(0, 0),
                     FrameHeight = ballHeight,
                     FrameWidth = ballWidth,
-                    Scale = scale
+                    Scale = scale,
+                    LayerDepth = 0.5F
+                },
+                new CollisionExclusionComponent()
+                {
+                    Exclusions = new TypeFilter()
+                    .AddFilter(typeof (PowerUp))
                 }
             };
 

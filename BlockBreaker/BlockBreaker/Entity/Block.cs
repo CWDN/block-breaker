@@ -36,7 +36,8 @@ namespace BlockBreaker.Entity
                     Location = new Point(0, 0),
                     FrameHeight = blockHeight,
                     FrameWidth = blockWidth,
-                    Scale = scale
+                    Scale = scale,
+                    LayerDepth = 0.2F
                 },
                 new HealthComponent()
                 {

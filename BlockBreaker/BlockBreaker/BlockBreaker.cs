@@ -46,11 +46,12 @@ namespace BlockBreaker
             EntityFactory.GetInstance().Register<Wall>();
             EntityFactory.GetInstance().Register<Ball>();
             EntityFactory.GetInstance().Register<Block>();
+            EntityFactory.GetInstance().Register<PowerUp>();
 
             GameServices.Initialize(Content, _graphics);
 
-            _graphics.PreferredBackBufferHeight = 720;
-            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 600;
+            _graphics.PreferredBackBufferWidth = 800;
             _graphics.ApplyChanges();
 
 
@@ -73,6 +74,7 @@ namespace BlockBreaker
             Wall topWall = EntityFactory.GetInstance().Construct<Wall>();
             Ball ball = EntityFactory.GetInstance().Construct<Ball>();
             Block block = EntityFactory.GetInstance().Construct<Block>();
+            PowerUp powerUp = EntityFactory.GetInstance().Construct<PowerUp>();
 
             List<Component> rightWallComponents = rightWall.GetDefaultComponents();
 
@@ -107,13 +109,14 @@ namespace BlockBreaker
             _world.AddSystem(new BallMovementSystem());
             _world.AddSystem(new HealthSystem());
             _world.AddSystem(new BlockHealthSystem());
-            
+
             _world.AddEntity(ball, ball.GetDefaultComponents());
             _world.AddEntity(paddle, paddle.GetDefaultComponents());
             _world.AddEntity(leftWall, leftWall.GetDefaultComponents());
             _world.AddEntity(rightWall, rightWallComponents);
             _world.AddEntity(topWall, topWallComponents);
             _world.AddEntity(block, block.GetDefaultComponents());
+            _world.AddEntity(powerUp, powerUp.GetDefaultComponents());
         }
 
         /// <summary>
@@ -145,10 +148,9 @@ namespace BlockBreaker
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
             _spriteBatch.Draw(_background, new Rectangle(0,0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
-
 
             _world.Draw(_spriteBatch);
 

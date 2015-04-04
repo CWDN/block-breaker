@@ -62,7 +62,8 @@ namespace BlockBreaker.Entity
                     Location = new Point(0, 0),
                     FrameHeight = paddleHeight,
                     FrameWidth = paddleWidth,
-                    Scale = 1
+                    Scale = 1,
+                    LayerDepth = 1F
                 }
             };
 

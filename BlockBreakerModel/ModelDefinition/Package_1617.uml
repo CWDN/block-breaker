@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="51698955-2760-4ff8-b2fd-45911edc8b25"
+  name="Entity"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="6e12e7b5-f4bc-4e5c-896e-a9cd8da6fee0"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DAtom.Entity"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="860445ca-626f-498f-b9ac-067f70094c8c"
+        name="BaseEntity"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="6ad91cc0-597f-43a5-9df4-56354d41ebcb"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FChris%2FProjects%2FAtom%2FAtom%2Fbin%2Fx86%2FDebug%2FAtom.dll Namespace%3DAtom.Entity Type%3DBaseEntity"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="3fd63747-e84b-440a-ab81-35aadcc0c50a"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4dbd8f75-ff43-41c8-adb1-f8519eb7f90e">
+                <propertyInstance
+                  Id="2400db41-bdb1-4936-ac95-40e5a4fcb13e"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4caccc54-36cf-4453-81d0-8c34320891ec">
+                <propertyInstance
+                  Id="2ba40cd6-0d7b-4527-8b15-2715422daa62"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9b0fc0e9-369d-42c2-abc0-4b13cfbe8b6d">
+                <propertyInstance
+                  Id="d0471c7f-9cc4-487f-a684-f8c3aaef3c81"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7d994127-8c74-40e7-9d86-98c10386deed">
+                <propertyInstance
+                  Id="365fca9a-1011-4346-926c-8ac3c2c3a12f"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="372228b5-187c-4252-8a06-a1e2c5174ba9">
+                <propertyInstance
+                  Id="7669b53a-5491-4823-a070-f4269500d65e"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="a250d51e-9d97-4710-b8d4-549b822a3a6e"
+            name="Content"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="0d01366f-41a5-419e-aaeb-21bc5ebde5b2"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FChris%2FProjects%2FAtom%2FAtom%2Fbin%2Fx86%2FDebug%2FAtom.dll Namespace%3DAtom.Entity Type%3DBaseEntity Member%3DContent"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="80151e63-56d5-437a-a71c-3e42396f58a7"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="99bb5d6d-71e6-41a7-af22-806bf66334e1">
+                    <propertyInstance
+                      Id="9437c23b-cdfd-4201-b96c-a053ce143697"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="af414714-516b-446d-bbfa-43d1f2d2e42e">
+                    <propertyInstance
+                      Id="5300b71d-cd59-44e1-ad5b-4605e3b9f0b2"
+                      name="Get"
+                      value="protected" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="031b6f8a-b96c-4fc5-aae7-2ec530dd0668">
+                    <propertyInstance
+                      Id="7025181f-903e-48a1-8e3f-d3ce6da5bca5"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b096f916-bc42-4196-aaa2-46ea57e1e24a">
+                    <propertyInstance
+                      Id="84d307c2-0ee4-4588-b744-4a37bb54431b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1e445886-d14b-4303-a0a4-9378a4d60e8c">
+                    <propertyInstance
+                      Id="ef8b553a-43b0-42eb-a5d4-d73faf6379b8"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="aeba2ad1-9831-4264-8e59-4f87f5f1c3e5">
+                    <propertyInstance
+                      Id="237e23cf-c185-4f11-86ab-e5c93bb5117a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b2934a26-5238-483b-a671-36065bda2654">
+                    <propertyInstance
+                      Id="78c6ce8a-bd10-4573-91db-4554cbb92d94"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="e9123027-4199-4015-bf60-0e870d8033ac"
+                LastKnownName="ContentManager"
+                LastKnownLocation="Package7_1617.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="97646b23-7526-4756-be30-9c2adb533345"
+            name="Id"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="b2c39e35-251d-4ec5-b722-5ced6256a450"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FChris%2FProjects%2FAtom%2FAtom%2Fbin%2Fx86%2FDebug%2FAtom.dll Namespace%3DAtom.Entity Type%3DBaseEntity Member%3DId"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="d7c3586c-0eda-4c1b-8707-c6710b5a6220"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bff892a1-e048-40e7-9d3d-a17fb4eb2f9c">
+                    <propertyInstance
+                      Id="deedb46d-7317-4be6-bf9e-5c880469bdf6"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d65fc43f-6a1d-49b5-94e8-6c363086e2f7">
+                    <propertyInstance
+                      Id="8e33b6d4-a01e-467b-b053-c0eed5279e0f"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="452a2d1d-14c7-4cb7-a927-2d351ce973f0">
+                    <propertyInstance
+                      Id="5cb2d74f-69c1-4b47-80be-b9a9f8ae709f"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bb83436f-c1de-46b4-8542-5d4a2845f2a8">
+                    <propertyInstance
+                      Id="83e66c3e-f900-4186-aef3-bfc0f9cc7120"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f4593dfe-3622-4814-8d4d-6d823a704eb0">
+                    <propertyInstance
+                      Id="ec4c2eb3-47c1-43aa-b46d-05fcf1d8baab"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b05b9cd4-d764-4ef0-8598-b4d2f487045a">
+                    <propertyInstance
+                      Id="6b99e0bc-adba-4870-9a0f-6045507d8728"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="70b83256-aa95-4d69-b821-5e016ab889d9">
+                    <propertyInstance
+                      Id="0125b744-ff96-475f-a27a-7dd63d575fca"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="BlockBreakerModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="1bc942d7-bb10-49c8-9248-4c9761e1ad48"
+            name="BaseEntity"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="21cf23c6-ee4a-417b-9d4b-374f0382f248"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FChris%2FProjects%2FAtom%2FAtom%2Fbin%2Fx86%2FDebug%2FAtom.dll Namespace%3DAtom.Entity Type%3DBaseEntity Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="834ac80f-98a9-4572-bb0f-7d25164a6212"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bca49415-bcb1-4052-8183-75998b59f1a1">
+                    <propertyInstance
+                      Id="8aa69b15-25c6-439e-bf03-da4b5fa9a2f8"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bc1e94b8-98a2-4737-95be-08007214c273">
+                    <propertyInstance
+                      Id="f7c07cf8-fbb3-4c78-aa8f-bdf469f0e1c7"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="60e0d9fc-5570-4b86-9e52-74af2a8b19bb">
+                    <propertyInstance
+                      Id="8ac18ed7-d872-404c-9ed2-9cdcb0a1b7c6"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e572414d-afa6-442f-ab32-89214a278d99">
+                    <propertyInstance
+                      Id="77c3840f-e9d3-4f5e-912d-ff9480225231"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="66d88f71-5593-453c-8d40-5826ee53095c">
+                    <propertyInstance
+                      Id="d7c32d40-5cfb-4bb4-a97c-938d1bd77253"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="647db36c-389f-4f1c-9a65-744885a461e1">
+                    <propertyInstance
+                      Id="385d49ee-e0ca-4eb2-9e31-cb844888b09a"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="c1fdee16-0890-45a4-bd74-99d4f801a85d"
+            name="CreateDefaultComponents"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="6d916fc0-bf60-4534-87b6-269a3d2504d4"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FChris%2FProjects%2FAtom%2FAtom%2Fbin%2Fx86%2FDebug%2FAtom.dll Namespace%3DAtom.Entity Type%3DBaseEntity Member%3DCreateDefaultComponents"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="178def0f-7a45-49cd-829c-05f2d90dfa4b"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="55dfb162-1ad9-40b1-aba7-18854022127f">
+                    <propertyInstance
+                      Id="3e89fc51-9a6d-4a5e-84bc-79a10d4cb49d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="430a42de-a887-44da-ad5e-b095a02e1d1a">
+                    <propertyInstance
+                      Id="b7babf2f-def9-483d-951a-0f5f3aceeac4"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7a7474e0-4540-4f6b-a7d0-a35865babaa7">
+                    <propertyInstance
+                      Id="3012bd28-57b7-43fe-9746-c91d978800ff"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="35f9f242-0444-45e1-84a1-b63399e38dd0">
+                    <propertyInstance
+                      Id="3807d49a-f66b-4972-b301-598a020a2cdf"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a2d00a63-6fc2-4d87-a9d7-64086a3c52f9">
+                    <propertyInstance
+                      Id="af5094ea-c53d-4843-b293-805a140e2216"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="da0e99f5-131a-4269-a446-0b5fbce8e7b4">
+                    <propertyInstance
+                      Id="07b22a3e-01fe-4537-95b4-ece7014e1554"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5c694d76-9ea6-4e2e-a271-b5d3bd592f98"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="8c12bd61-8af2-4919-a41d-4fc5558b09cd"
+                      LastKnownName="List&lt;Component‎&gt;"
+                      LastKnownLocation="Package3_1617.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="e4c84fd4-3928-46d0-a643-1d501047b564"
+            name="GetDefaultComponents"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="5eaaa777-84a2-406e-b736-3d99b6dad138"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FC:%2FUsers%2FChris%2FProjects%2FAtom%2FAtom%2Fbin%2Fx86%2FDebug%2FAtom.dll Namespace%3DAtom.Entity Type%3DBaseEntity Member%3DGetDefaultComponents"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="3a983ea1-7203-465c-b886-0b54f798c029"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9e85a61c-5458-410e-a573-c6ff9aa7a5a0">
+                    <propertyInstance
+                      Id="129942d0-bb81-4a4d-96c2-7a6bfc06ee64"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="514cca69-60e9-459b-a804-b1ce53422610">
+                    <propertyInstance
+                      Id="e2496230-cd00-4fcd-9a1b-be6fff152658"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2e3e90df-d254-4f8d-9238-a73807b7880c">
+                    <propertyInstance
+                      Id="a98f96b5-9d2c-44c4-9f64-efb3b7875279"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="eb47c26b-1f6c-4607-84eb-f893971de49d">
+                    <propertyInstance
+                      Id="d59bab30-1f8c-4529-b448-2655f1e07fc8"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dd54ad0e-5b56-42fc-b902-e93285e9c3bf">
+                    <propertyInstance
+                      Id="6c243995-aeec-4bb5-94b3-1ad00073b7be"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="da509c36-5777-4f38-a597-e2fe6e094ba1">
+                    <propertyInstance
+                      Id="d69b997b-c75a-4a86-8af4-85f4d6222efa"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f1cbd10a-3835-46f8-8b32-5c1f148be8da"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="8c12bd61-8af2-4919-a41d-4fc5558b09cd"
+                      LastKnownName="List&lt;Component‎&gt;"
+                      LastKnownLocation="Package3_1617.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

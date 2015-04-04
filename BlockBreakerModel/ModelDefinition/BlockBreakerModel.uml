@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="1694369f-3de2-4878-a469-5135c6f583d2"
+  name="BlockBreakerModel" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="b1aa5c3a-9294-4dd9-8f5f-5e2d0c03d8b1">
+      <profileInstance
+        Id="c16edfa4-38a4-4f0a-a95e-3a1521082988"
+        name="CSharpProfile" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="7a56fad1-98e4-4640-946d-84bd38c5527b"
+        name="HealthComponent"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="20e53a15-e570-4119-a644-b7a711578b99"
+            isSubstitutable="false">
+            <classMoniker
+              Id="202dc451-9f5b-4b1f-9531-008398865a59"
+              LastKnownName="Component"
+              LastKnownLocation="Package_1605.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="fc3d06f9-e385-41dd-ab62-f3b9d0b48bd1"
+            name="Health"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                LastKnownName="Integer"
+                LastKnownLocation="BlockBreakerModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="c816a8fb-ca12-443a-aaa5-2b5c00915e60"
+            name="HealthComponent"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="df722bf2-8425-4529-acc8-0f9cde13cee9"
+        LastKnownName="Atom"
+        LastKnownLocation="Package_1605.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a5f999ff-2809-46da-b517-9f9f45db7bcc"
+        name="Level"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="989e302b-05aa-4c2a-80bf-07d80b059eb6"
+            name="Blocks"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="77907d52-4a24-4c65-8eee-0515e38b9c22"
+                LastKnownName="Array"
+                LastKnownLocation="BlockBreakerModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="3a0c6760-9582-4cab-9f6c-e293dbd53641"
+            name="Level"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="de283702-510a-49e1-8bb9-1f2a073e5f03"
+            name="LoadFromImage"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f7124010-63b5-4923-99ea-6e85b7bdfc27"
+                  name="Texture2D texture"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="77907d52-4a24-4c65-8eee-0515e38b9c22"
+        name="Array" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="595fcde4-84bc-4888-9db9-ba03751b2bcf"
+        name="Block"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="4167c935-55ee-4cb5-8fff-daa495e4743e"
+            isSubstitutable="false">
+            <classMoniker
+              Id="860445ca-626f-498f-b9ac-067f70094c8c"
+              LastKnownName="BaseEntity"
+              LastKnownLocation="Package_1617.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="5c14c8ad-316f-40cb-b004-0b267c7fe00c"
+        LastKnownName="System"
+        LastKnownLocation="Package1_1617.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="2c377d9b-88aa-4c0b-8a7f-6f1fd2515008"
+        LastKnownName="Microsoft"
+        LastKnownLocation="Package4_1617.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9cc92d77-3a28-4ecf-a50c-1422367749b2"
+        name="Paddle"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="b0703eaa-4d72-4ab9-b75c-05c4232eb10e"
+            isSubstitutable="false">
+            <classMoniker
+              Id="860445ca-626f-498f-b9ac-067f70094c8c"
+              LastKnownName="BaseEntity"
+              LastKnownLocation="Package_1617.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b414e96d-fc90-4595-8350-7be3234e2852"
+        name="Ball"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="23bdeebe-e168-449e-afed-f5bc0b7864ce"
+            isSubstitutable="false">
+            <classMoniker
+              Id="860445ca-626f-498f-b9ac-067f70094c8c"
+              LastKnownName="BaseEntity"
+              LastKnownLocation="Package_1617.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="51d7466f-bdcd-448a-8c68-6926a26ba585"
+        name="Wall"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="8282d306-0839-4615-b00b-980eb44cf4c6"
+            isSubstitutable="false">
+            <classMoniker
+              Id="860445ca-626f-498f-b9ac-067f70094c8c"
+              LastKnownName="BaseEntity"
+              LastKnownLocation="Package_1617.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="7ba13e9e-a3dd-45c9-aca2-dc81a5d6a1cd"
+        name="Power Up"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="5b962162-15dc-4339-9b49-d79e3e0e9168"
+            isSubstitutable="false">
+            <classMoniker
+              Id="860445ca-626f-498f-b9ac-067f70094c8c"
+              LastKnownName="BaseEntity"
+              LastKnownLocation="Package_1617.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3260a593-7f60-4746-a39f-f34d9ee80ed9"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

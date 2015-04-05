@@ -1,16 +1,6 @@
-using System.Collections.Generic;
 using Atom;
-using Atom.Entity;
-using Atom.Graphics.Rendering.Static;
-using Atom.Input;
-using Atom.Physics;
-using Atom.Physics.Collision.BoundingBox;
-using Atom.Physics.Movement;
-using Atom.World;
-using BlockBreaker.Entity;
-using BlockBreaker.Entity.Systems;
-using BlockBreaker.Input;
-using BlockBreaker.Physics;
+using Atom.GameStates;
+using BlockBreaker.GameStates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -23,13 +13,16 @@ namespace BlockBreaker
     {
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
-        private Texture2D _background;
-        private World _world;
+        private GameStateManager _gameStateManager;
+
+        private static BlockBreaker instance;
 
         public BlockBreaker()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _gameStateManager = new GameStateManager();
             Content.RootDirectory = "Content";
+            instance = this;
         }
 
         /// <summary>
@@ -40,20 +33,23 @@ namespace BlockBreaker
         /// </summary>
         protected override void Initialize()
         {
-            _world = new World();
-
-            EntityFactory.GetInstance().Register<Paddle>();
-            EntityFactory.GetInstance().Register<Wall>();
-            EntityFactory.GetInstance().Register<Ball>();
-            EntityFactory.GetInstance().Register<Block>();
-            EntityFactory.GetInstance().Register<PowerUp>();
-
-            GameServices.Initialize(Content, _graphics);
-
-            _graphics.PreferredBackBufferHeight = 600;
-            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.PreferredBackBufferWidth = 1280;
             _graphics.ApplyChanges();
 
+            GameServices.Initialize(Content, _graphics);
+            GameServices.AddService(_gameStateManager);
+
+            GameStateInGame gameStateInGame = new GameStateInGame("InGame");
+            GameStateMainMenu gameStateMainMenu = new GameStateMainMenu("MainMenu");
+            GameStateHighscores gameStateHighscores = new GameStateHighscores("Highscores");
+            _gameStateManager.Add(gameStateInGame);
+            _gameStateManager.Add(gameStateMainMenu);
+            _gameStateManager.Add(gameStateHighscores);
+
+            IsMouseVisible = true;
+
+            _gameStateManager.Initialize();
 
             base.Initialize();
         }
@@ -65,58 +61,9 @@ namespace BlockBreaker
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _gameStateManager.LoadContent(Content);
 
-            _background = Content.Load<Texture2D>("Background");
-
-            Paddle paddle = EntityFactory.GetInstance().Construct<Paddle>();
-            Wall leftWall = EntityFactory.GetInstance().Construct<Wall>();
-            Wall rightWall = EntityFactory.GetInstance().Construct<Wall>();
-            Wall topWall = EntityFactory.GetInstance().Construct<Wall>();
-            Ball ball = EntityFactory.GetInstance().Construct<Ball>();
-            Block block = EntityFactory.GetInstance().Construct<Block>();
-            PowerUp powerUp = EntityFactory.GetInstance().Construct<PowerUp>();
-
-            List<Component> rightWallComponents = rightWall.GetDefaultComponents();
-
-            PositionComponent rightWallPositionComponent = (PositionComponent)rightWallComponents.Find(component =>
-                component.GetType() == typeof (PositionComponent));
-
-            BoundingBoxComponent rightWallBoundingBoxComponent = (BoundingBoxComponent)rightWallComponents.Find(component =>
-                component.GetType() == typeof(BoundingBoxComponent));
-
-            rightWallPositionComponent.X += rightWallBoundingBoxComponent.Width + _graphics.PreferredBackBufferWidth;
-
-            List<Component> topWallComponents = topWall.GetDefaultComponents();
-
-            PositionComponent topWallPositionComponent = (PositionComponent)topWallComponents.Find(component =>
-                component.GetType() == typeof(PositionComponent));
-
-            BoundingBoxComponent topWallBoundingBoxComponent = (BoundingBoxComponent)topWallComponents.Find(component =>
-                component.GetType() == typeof(BoundingBoxComponent));
-
-            topWallPositionComponent.X = 0;
-            topWallBoundingBoxComponent.Height = topWallBoundingBoxComponent.Width;
-            topWallPositionComponent.Y -= topWallBoundingBoxComponent.Height;
-            topWallBoundingBoxComponent.Width = _graphics.PreferredBackBufferWidth;
-
-            _world.AddSystem(new StaticRenderSystem());
-            _world.AddSystem(new MovementSystem());
-            _world.AddSystem(new BoundingBoxSystem());
-            _world.AddSystem(new BoundingBoxCollisionResolveSystem());
-            _world.AddSystem(new CollisionResponseSystem());
-            _world.AddSystem(new StandardKeyboardSystem());
-            _world.AddSystem(new KeyboardInputSystem());
-            _world.AddSystem(new BallMovementSystem());
-            _world.AddSystem(new HealthSystem());
-            _world.AddSystem(new BlockHealthSystem());
-
-            _world.AddEntity(ball, ball.GetDefaultComponents());
-            _world.AddEntity(paddle, paddle.GetDefaultComponents());
-            _world.AddEntity(leftWall, leftWall.GetDefaultComponents());
-            _world.AddEntity(rightWall, rightWallComponents);
-            _world.AddEntity(topWall, topWallComponents);
-            _world.AddEntity(block, block.GetDefaultComponents());
-            _world.AddEntity(powerUp, powerUp.GetDefaultComponents());
+            _gameStateManager.SwapState("MainMenu");
         }
 
         /// <summary>
@@ -135,8 +82,7 @@ namespace BlockBreaker
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            _world.Update(gameTime);
-
+            _gameStateManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -147,16 +93,15 @@ namespace BlockBreaker
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-
-            _spriteBatch.Draw(_background, new Rectangle(0,0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
-
-            _world.Draw(_spriteBatch);
-
-            _spriteBatch.End();
+            
+            _gameStateManager.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
+        }
+
+        public static BlockBreaker GetInstance()
+        {
+            return instance;
         }
     }
 }

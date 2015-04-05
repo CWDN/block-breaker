@@ -5,6 +5,7 @@ using Atom.Graphics.Rendering;
 using Atom.Input;
 using Atom.Physics;
 using Atom.Physics.Collision.BoundingBox;
+using BlockBreaker.Entity.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -55,6 +56,7 @@ namespace BlockBreaker.Entity
                     Active = true,
                     Width = paddleWidth,
                     Height = paddleHeight,
+                    ShouldMoveY = true
                 },
                 new SpriteComponent()
                 {
@@ -63,7 +65,12 @@ namespace BlockBreaker.Entity
                     FrameHeight = paddleHeight,
                     FrameWidth = paddleWidth,
                     Scale = 1,
-                    LayerDepth = 1F
+                    LayerDepth = 0.3F
+                },
+                new HealthComponent()
+                {
+                    Health = 5,
+                    MaxHealth = 10
                 }
             };
 

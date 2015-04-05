@@ -18,11 +18,11 @@ namespace BlockBreaker.Entity
             int blockHeight = 73;
             int blockWidth = 73;
 
-            float scale = 1F;
+            float scale = 0.75F;
 
             List<Component> components = new List<Component>
             {
-                new PositionComponent() {X = middleOfScreen - blockWidth * scale / 2, Y = (blockHeight * scale) + 70 },
+                new PositionComponent() {X = (middleOfScreen - blockWidth * scale / 2), Y = (blockHeight * scale) + 70 },
                 new VelocityComponent(),
                 new BoundingBoxComponent()
                 {
@@ -41,8 +41,8 @@ namespace BlockBreaker.Entity
                 },
                 new HealthComponent()
                 {
-                    MaxHealth = 7,
-                    Health = 7
+                    MaxHealth = 1,
+                    Health = 1
                 }
             };
 

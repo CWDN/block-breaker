@@ -23,7 +23,9 @@ namespace BlockBreaker.Entity.Systems
             if (message is RemoveHealthMessage)
             {
                 RemoveHealthMessage removeMessage = message as RemoveHealthMessage;
-                HealthComponent healthComponent = GetComponentsByEntityId<HealthComponent>(removeMessage.GetEntityId()).First();
+                HealthComponent healthComponent = GetComponentsByEntityId<HealthComponent>(removeMessage.GetEntityId()).FirstOrDefault();
+
+                if (healthComponent == null) return;
 
                 if (healthComponent.Health - removeMessage.GetHealth() > 0)
                 {
@@ -39,8 +41,6 @@ namespace BlockBreaker.Entity.Systems
             if (message is DeadEntityMessage)
             {
                 DeadEntityMessage deadEntityMessage = message as DeadEntityMessage;
-
-                World.GetInstance().RemoveEntity(deadEntityMessage.GetEntityId());
             }
         }
 

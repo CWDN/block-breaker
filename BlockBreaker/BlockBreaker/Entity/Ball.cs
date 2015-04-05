@@ -50,6 +50,8 @@ namespace BlockBreaker.Entity
                 {
                     Exclusions = new TypeFilter()
                     .AddFilter(typeof (PowerUp))
+                    .AddFilter(typeof (Laser))
+                    .AddFilter(typeof (Ball))
                 }
             };
 

@@ -8,7 +8,7 @@ namespace BlockBreaker.Entity.Messages
     {
         public string[] Data { get; set; }
 
-        public SpawnPowerUpMessage(int x, int y) : base(new Vector2(x, y))
+        public SpawnPowerUpMessage(int x, int y) : this(new Vector2(x, y))
         {
             Data = new string[2];
             SetXAndY(x, y);

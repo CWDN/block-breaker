@@ -3,6 +3,7 @@ using Atom;
 using Atom.Entity;
 using Atom.Graphics.Rendering;
 using Atom.Physics;
+using Atom.Physics.Collision;
 using Atom.Physics.Collision.BoundingBox;
 using Atom.Physics.Gravity;
 using Microsoft.Xna.Framework;
@@ -22,9 +23,9 @@ namespace BlockBreaker.Entity
                 new MassComponent() {Mass = 1F},
                 new BoundingBoxComponent()
                 {
-                    Active = false,
-                    Width = 84,
-                    Height = 84,
+                    Active = true,
+                    Width = 42,
+                    Height = 42,
                 },
                 new SpriteComponent()
                 {
@@ -32,8 +33,15 @@ namespace BlockBreaker.Entity
                     Location = new Point(0, 0),
                     FrameHeight = 84,
                     FrameWidth = 84,
-                    Scale = 1F,
-                    LayerDepth = 1F
+                    Scale = 0.5F,
+                    LayerDepth = 0.4F
+                },
+                new CollisionExclusionComponent()
+                {
+                    Exclusions = new TypeFilter()
+                    .AddFilter(typeof (PowerUp))
+                    .AddFilter(typeof (Ball))
+                    .AddFilter(typeof (Block))
                 },
                 new GravityComponent()
                 {

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Atom;
 using Atom.Messaging;
-using Atom.World;
 using BlockBreaker.Entity.Components;
 using BlockBreaker.Entity.Messages;
 
@@ -9,6 +8,9 @@ namespace BlockBreaker.Entity.Systems
 {
     public class HealthSystem : BaseSystem, IReceiver
     {
+        /// <summary>
+        /// Manages the health of the entities.
+        /// </summary>
         public HealthSystem()
         {
             ComponentTypeFilter = new TypeFilter()
@@ -17,7 +19,11 @@ namespace BlockBreaker.Entity.Systems
             PostOffice.Subscribe(this);
         }
 
-
+        /// <summary>
+        /// When a message is receive it will remove the health set in the message.
+        /// If the health reaches 0 then it will send a dead entity message.
+        /// </summary>
+        /// <param name="message"></param>
         public void OnMessage(IMessage message)
         {
             if (message is RemoveHealthMessage)
@@ -44,6 +50,10 @@ namespace BlockBreaker.Entity.Systems
             }
         }
 
+        /// <summary>
+        /// Returns the types of messages this system wants to receive.
+        /// </summary>
+        /// <returns></returns>
         public TypeFilter GetMessageTypeFilter()
         {
             return new TypeFilter()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Atom;
 using Atom.Entity;
 using Atom.Messaging;
@@ -17,6 +16,9 @@ namespace BlockBreaker.Physics
 {
     public class CollisionResponseSystem : BaseSystem, IReceiver
     {
+        /// <summary>
+        /// Manages the response from the collision system.
+        /// </summary>
         public CollisionResponseSystem()
         {
             ComponentTypeFilter = new TypeFilter()
@@ -26,6 +28,10 @@ namespace BlockBreaker.Physics
             PostOffice.Subscribe(this);
         }
 
+        /// <summary>
+        /// Called when the PostOffice receives a collision response message.
+        /// </summary>
+        /// <param name="message"></param>
         public void OnMessage(IMessage message)
         {
             CollisionResponseMessage collisionMessage = (CollisionResponseMessage) message;
@@ -35,6 +41,9 @@ namespace BlockBreaker.Physics
 
             CollisionFace face = collisionMessage.GetCollisionFace();
 
+            /**
+             * Manages the power ups that collided with the paddle.
+             */
             if (entity is Paddle)
             {
                 VelocityComponent velocityComponent = GetComponentsByEntityId<VelocityComponent>(entity.Id).FirstOrDefault();
@@ -57,7 +66,9 @@ namespace BlockBreaker.Physics
                 }
                 
             }
-
+            /**
+             * Manages the rebound bounce of the ball.
+             */
             if (entity is Ball)
             {
                 VelocityComponent velocityComponent = GetComponentsByEntityId<VelocityComponent>(entity.Id).FirstOrDefault();
@@ -76,12 +87,17 @@ namespace BlockBreaker.Physics
 
                 PostOffice.SendMessage(new AudioMessage("bounce", AudioTypes.SoundEffect));
             }
-
+            /**
+             * Removes one health from the block when it collides with another entity.
+             */
             if (entity is Block)
             {
                 PostOffice.SendMessage(new RemoveHealthMessage(entity.Id, 1));
             }
 
+            /**
+             * Removes the laser when it collides with something.
+             */
             if (entity is Laser)
             {
                 World.GetInstance().RemoveEntity(entity.Id);
@@ -89,6 +105,10 @@ namespace BlockBreaker.Physics
             
         }
 
+        /// <summary>
+        /// Returns a filter of all the messages this systems wants to receive.
+        /// </summary>
+        /// <returns></returns>
         public TypeFilter GetMessageTypeFilter()
         {
             return new TypeFilter()

@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audio\AudioTypes.cs" />
+    <Compile Include="EndGameReason.cs" />
     <Compile Include="Entity\Ball.cs" />
     <Compile Include="Entity\Block.cs" />
     <Compile Include="Entity\Components\AmmoComponent.cs" />
@@ -92,7 +93,7 @@
     <Compile Include="Audio\AudioSystem.cs" />
     <Compile Include="Entity\Systems\BlockHealthSystem.cs" />
     <Compile Include="Entity\Systems\HealthSystem.cs" />
-    <Compile Include="Entity\Systems\LifeCheckerSystem.cs" />
+    <Compile Include="Entity\Systems\EndGameSystem.cs" />
     <Compile Include="Entity\Systems\PowerUpSystem.cs" />
     <Compile Include="Entity\Systems\ScoreSystem.cs" />
     <Compile Include="Entity\Systems\SpawnLaserSystem.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="GameStates\GameStateMainMenu.cs" />
     <Compile Include="HighscoreManager.cs" />
     <Compile Include="Input\KeyboardInputSystem.cs" />
+    <Compile Include="Level\Level.cs" />
     <Compile Include="Level\LevelBuilder.cs" />
     <Compile Include="Physics\BasicMovementSystem.cs" />
     <Compile Include="Physics\CollisionResponseSystem.cs" />

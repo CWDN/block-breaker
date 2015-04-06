@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace BlockBreaker
 {
     /// <summary>
-    /// This is the main type for your game
+    /// The start of the Block breaker game.
     /// </summary>
     public class BlockBreaker : Microsoft.Xna.Framework.Game
     {
@@ -26,10 +26,7 @@ namespace BlockBreaker
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
+        /// Initialises the game.
         /// </summary>
         protected override void Initialize()
         {
@@ -40,6 +37,7 @@ namespace BlockBreaker
             GameServices.Initialize(Content, _graphics);
             GameServices.AddService(_gameStateManager);
 
+            // Initialises the 3 games tates and adds them to the game state manager.
             GameStateInGame gameStateInGame = new GameStateInGame("InGame");
             GameStateMainMenu gameStateMainMenu = new GameStateMainMenu("MainMenu");
             GameStateHighscores gameStateHighscores = new GameStateHighscores("Highscores");
@@ -55,8 +53,7 @@ namespace BlockBreaker
         }
 
         /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
+        /// Loads the content of the game.
         /// </summary>
         protected override void LoadContent()
         {
@@ -67,17 +64,7 @@ namespace BlockBreaker
         }
 
         /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-
-        }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
+        /// Updates the game state manager, which in turn which update which ever is the current game state.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
@@ -87,7 +74,7 @@ namespace BlockBreaker
         }
 
         /// <summary>
-        /// This is called when the game should draw itself.
+        /// Draws the game
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
@@ -99,6 +86,10 @@ namespace BlockBreaker
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Returns an instance of the Block Breaker game.
+        /// </summary>
+        /// <returns></returns>
         public static BlockBreaker GetInstance()
         {
             return instance;

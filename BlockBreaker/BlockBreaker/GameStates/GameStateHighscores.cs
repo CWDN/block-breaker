@@ -15,6 +15,10 @@ namespace BlockBreaker.GameStates
         private GuiButton _returnButton;
         private GuiScreen _guiScreen;
 
+        /// <summary>
+        /// Game state for the high scores menu.
+        /// </summary>
+        /// <param name="name"></param>
         public GameStateHighscores(string name)
             : base(name)
         {
@@ -22,12 +26,19 @@ namespace BlockBreaker.GameStates
             ScreenHeight = GameServices.Graphics.PreferredBackBufferHeight;
         }
 
-        public override void Initialize()
+        /// <summary>
+        /// Initialises the gui's.
+        /// </summary>
+        public override void Initialise()
         {
             _returnButton = new GuiButton(new Vector2(0.05F, 0.05F), 0.1F, 0.09F) { BackColour = Color.Transparent, Anchor = Anchor.TopLeft };
             _guiScreen = new GuiScreen(new Point(0, 0), ScreenWidth, ScreenHeight);
         }
 
+        /// <summary>
+        /// Loads the GUI's.
+        /// </summary>
+        /// <param name="contentManager"></param>
         public override void LoadContent(ContentManager contentManager)
         {
             List<int> highScores = HighscoreManager.GetInstance().GetHighScores();
@@ -54,6 +65,9 @@ namespace BlockBreaker.GameStates
             float posX = -0.4F;
             float posY = -0.5F;
 
+            /**
+             * Loops 10 times to create the top ten high scores.
+             */
             for (int i = 0; i < 10; i++)
             {
                 GuiLabel guiLabel = new GuiLabel(new Vector2(posX, posY), 0.1F, 0.1F) { BackColour = Color.Transparent, Anchor = Anchor.Middle };
@@ -77,11 +91,20 @@ namespace BlockBreaker.GameStates
             _guiScreen.AddGui(_returnButton);
         }
 
+        /// <summary>
+        /// Updates the GUI
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             _guiScreen.Update();
         }
 
+        /// <summary>
+        /// Draws the GUi
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);

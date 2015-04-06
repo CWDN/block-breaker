@@ -11,11 +11,18 @@ namespace BlockBreaker
 
         private string _filePath;
 
+        /// <summary>
+        /// Manages the high scores of the game.
+        /// </summary>
         public HighscoreManager()
         {
             _instance = this;
         }
-
+        
+        /// <summary>
+        /// Checks the high score file exists.
+        /// </summary>
+        /// <param name="filePath"></param>
         public void CheckHighScoreFile(string filePath = "")
         {
             string file;
@@ -42,6 +49,10 @@ namespace BlockBreaker
             }
         }
 
+        /// <summary>
+        /// Adds a new high score to the list.
+        /// </summary>
+        /// <param name="score"></param>
         public void AddHighScore(int score)
         {
             CheckHighScoreFile();
@@ -58,6 +69,10 @@ namespace BlockBreaker
             }
         }
 
+        /// <summary>
+        /// Gets all the high scores.
+        /// </summary>
+        /// <returns></returns>
         public List<int> GetHighScores()
         {
             CheckHighScoreFile();
@@ -65,6 +80,11 @@ namespace BlockBreaker
             return scores.ToList().ConvertAll(Convert.ToInt32);
         }
 
+        /// <summary>
+        /// Does an insertion sort on the high score list.
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public List<int> Sort(List<int> items)
         {
             for (int index = 1; index < items.Count; index++)
@@ -82,11 +102,19 @@ namespace BlockBreaker
             return items;
         }
 
+        /// <summary>
+        /// Gets the number one high score.
+        /// </summary>
+        /// <returns></returns>
         public int GetHighestScore()
         {
             return GetHighScores().FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns the instance of the high score manager.
+        /// </summary>
+        /// <returns></returns>
         public static HighscoreManager GetInstance()
         {
             return _instance ?? new HighscoreManager();

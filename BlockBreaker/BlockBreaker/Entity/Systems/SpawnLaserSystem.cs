@@ -11,6 +11,9 @@ namespace BlockBreaker.Entity.Systems
 {
     public class SpawnLaserSystem : BaseSystem, IReceiver
     {
+        /// <summary>
+        /// Manages the spawning of the lasers.
+        /// </summary>
         public SpawnLaserSystem()
         {
             ComponentTypeFilter = new TypeFilter()
@@ -20,6 +23,11 @@ namespace BlockBreaker.Entity.Systems
             PostOffice.Subscribe(this);
         }
 
+        /// <summary>
+        /// When it receives the spawn laser message it will spawn a power up
+        /// It spawns the laser at the given X and Y.
+        /// </summary>
+        /// <param name="message"></param>
         public void OnMessage(IMessage message)
         {
             SpawnLaserMessage spawnLaserMessage = message as SpawnLaserMessage;
@@ -43,6 +51,10 @@ namespace BlockBreaker.Entity.Systems
 
         }
 
+        /// <summary>
+        /// Returns a filter specifying the messages that the system wants to receive. 
+        /// </summary>
+        /// <returns></returns>
         public TypeFilter GetMessageTypeFilter()
         {
             return new TypeFilter()

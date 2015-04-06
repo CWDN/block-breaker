@@ -8,10 +8,16 @@ namespace BlockBreaker.Entity.Systems
 {
     public class ScoreSystem : BaseSystem, IReceiver
     {
+        /// <summary>
+        /// Stores the current score of the player.
+        /// </summary>
         public static int Score { get; set; }
 
         private SpriteFont _font;
 
+        /// <summary>
+        /// Manages the scores of the game
+        /// </summary>
         public ScoreSystem()
         {
             ComponentTypeFilter = new TypeFilter();
@@ -19,6 +25,11 @@ namespace BlockBreaker.Entity.Systems
             PostOffice.Subscribe(this);
         }
 
+        /// <summary>
+        /// Draws the current score on screen.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="entityId"></param>
         public override void Draw(SpriteBatch spriteBatch, int entityId)
         {
             string text = "Score: " + Score;
@@ -28,6 +39,10 @@ namespace BlockBreaker.Entity.Systems
             spriteBatch.DrawString(_font, text, new Vector2(GameServices.Graphics.PreferredBackBufferWidth - textWidth - 10, 5), Color.White, 0, Vector2.Zero, 1F, SpriteEffects.None, 0.01F);    
         }
 
+        /// <summary>
+        /// Updates the score when the score message is receieved.
+        /// </summary>
+        /// <param name="message"></param>
         public void OnMessage(IMessage message)
         {
             ScoreMessage scoreMessage = message as ScoreMessage;
@@ -35,6 +50,10 @@ namespace BlockBreaker.Entity.Systems
             Score += scoreMessage.GetScore();
         }
 
+        /// <summary>
+        /// Returns the types of messages this system wants to receive.
+        /// </summary>
+        /// <returns></returns>
         public TypeFilter GetMessageTypeFilter()
         {
             return new TypeFilter()

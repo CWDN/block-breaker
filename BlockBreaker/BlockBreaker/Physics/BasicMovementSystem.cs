@@ -10,6 +10,10 @@ namespace BlockBreaker.Physics
 {
     public class BasicMovementSystem : BaseSystem
     {
+        /// <summary>
+        /// Manages the movement of the entities.
+        /// This is a simple version of the movement system of Atom.
+        /// </summary>
         public BasicMovementSystem()
         {
             ComponentTypeFilter = new TypeFilter()
@@ -17,6 +21,11 @@ namespace BlockBreaker.Physics
                 .AddFilter(typeof (PositionComponent));
         }
 
+        /// <summary>
+        /// Updates the position of the ball and laser entities.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="entityId"></param>
         public override void Update(GameTime gameTime, int entityId)
         {
             BaseEntity entity = World.GetInstance().GetEntity(entityId);

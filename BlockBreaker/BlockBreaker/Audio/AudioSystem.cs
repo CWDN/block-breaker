@@ -1,7 +1,6 @@
 ﻿using System;
 using Atom;
 using Atom.Messaging;
-using BlockBreaker.Entity.Messages;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
@@ -10,14 +9,25 @@ namespace BlockBreaker.Audio
 {
     public class AudioSystem : BaseSystem, IReceiver
     {
+        /// <summary>
+        /// Whether the background music is playing.
+        /// </summary>
         private bool _backgroundMusicPlaying;
 
+        /// <summary>
+        /// Plays soungs and sound effects when sent a AudioMessage via the PostOffice.
+        /// </summary>
         public AudioSystem()
         {
             ComponentTypeFilter = new TypeFilter();
             PostOffice.Subscribe(this);
         }
 
+        /// <summary>
+        /// Update function
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="entityId">The entity to be updating.</param>
         public override void Update(GameTime gameTime, int entityId)
         {
             if (_backgroundMusicPlaying) return;
@@ -25,6 +35,10 @@ namespace BlockBreaker.Audio
             PostOffice.SendMessage(new AudioMessage("backgroundMusic", AudioTypes.Song));
         }
 
+        /// <summary>
+        /// Called when a message is sent from the PostOffice.
+        /// </summary>
+        /// <param name="message"></param>
         public void OnMessage(IMessage message)
         {
             AudioMessage audioMessage = message as AudioMessage;
@@ -48,6 +62,10 @@ namespace BlockBreaker.Audio
             }
         }
 
+        /// <summary>
+        /// Filters only the types of message this system wants to receive.
+        /// </summary>
+        /// <returns></returns>
         public TypeFilter GetMessageTypeFilter()
         {
             return new TypeFilter()

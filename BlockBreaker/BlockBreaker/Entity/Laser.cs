@@ -12,6 +12,10 @@ namespace BlockBreaker.Entity
 {
     public class Laser : BaseEntity
     {
+        /// <summary>
+        /// Returns a list of all the default components that this entity has.
+        /// </summary>
+        /// <returns></returns>
         protected override List<Component> CreateDefaultComponents()
         {
             List<Component> components = new List<Component>
@@ -32,6 +36,7 @@ namespace BlockBreaker.Entity
                     Exclusions = new TypeFilter()
                     .AddFilter(typeof (PowerUp))
                     .AddFilter(typeof (Laser))
+                    .AddFilter(typeof (Ball))
                 },
                 new AnimatedSpriteComponent()
                 {

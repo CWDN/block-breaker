@@ -14,6 +14,10 @@ namespace BlockBreaker.Entity
 {
     public class Ball : BaseEntity
     {
+        /// <summary>
+        /// Returns a list of all the default components that this entity has.
+        /// </summary>
+        /// <returns></returns>
         protected override List<Component> CreateDefaultComponents()
         {
             float middleOfScreen = (float)GameServices.Graphics.PreferredBackBufferWidth / 2;

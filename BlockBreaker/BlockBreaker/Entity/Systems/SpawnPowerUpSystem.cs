@@ -14,7 +14,9 @@ namespace BlockBreaker.Entity.Systems
 {
     public class SpawnPowerUpSystem : BaseSystem, IReceiver
     {
-
+        /// <summary>
+        /// Manages the spawning of the power ups.
+        /// </summary>
         public SpawnPowerUpSystem()
         {
             ComponentTypeFilter = new TypeFilter()
@@ -25,6 +27,12 @@ namespace BlockBreaker.Entity.Systems
             PostOffice.Subscribe(this);
         }
 
+        /// <summary>
+        /// When it receives the spawn power up message it will spawn a power up.
+        /// It will randomise the power that is spawned.
+        /// It spawns the power up at the given X and Y.
+        /// </summary>
+        /// <param name="message"></param>
         public void OnMessage(IMessage message)
         {
             if (message is SpawnPowerUpMessage)
@@ -33,7 +41,7 @@ namespace BlockBreaker.Entity.Systems
 
                 Random random = new Random();
 
-                int powerUpChoice = random.Next(0, 0);
+                int powerUpChoice = random.Next(0, 20);
 
                 if (powerUpChoice > 2) return;
 
@@ -65,6 +73,10 @@ namespace BlockBreaker.Entity.Systems
             }
         }
 
+        /// <summary>
+        /// Returns a filter specifying the messages that the system wants to receive. 
+        /// </summary>
+        /// <returns></returns>
         public TypeFilter GetMessageTypeFilter()
         {
             return new TypeFilter()

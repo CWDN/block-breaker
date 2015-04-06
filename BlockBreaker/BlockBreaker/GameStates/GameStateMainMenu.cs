@@ -4,7 +4,6 @@ using Atom.GUI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace BlockBreaker.GameStates
 {
@@ -17,13 +16,20 @@ namespace BlockBreaker.GameStates
         private GuiButton _quitButton;
         private GuiScreen _guiScreen;
 
+        /// <summary>
+        /// Game state for the main menu.
+        /// </summary>
+        /// <param name="name"></param>
         public GameStateMainMenu(string name) : base(name)
         {
             ScreenWidth = GameServices.Graphics.PreferredBackBufferWidth;
             ScreenHeight = GameServices.Graphics.PreferredBackBufferHeight;
         }
 
-        public override void Initialize()
+        /// <summary>
+        /// Initialises the main menu gui's.
+        /// </summary>
+        public override void Initialise()
         {
             _playButton = new GuiButton(new Vector2(0F, 0.2F), 0.3F, 0.2F) { BackColour = Color.Transparent, Anchor = Anchor.TopMiddle };
             _highScoreButton = new GuiButton(new Vector2(0F, 0.45F), 0.3F, 0.2F) { BackColour = Color.Transparent, Anchor = Anchor.TopMiddle };
@@ -31,6 +37,10 @@ namespace BlockBreaker.GameStates
             _guiScreen = new GuiScreen(new Point(0, 0), ScreenWidth, ScreenHeight);
         }
 
+        /// <summary>
+        /// Loads the main menu content.
+        /// </summary>
+        /// <param name="contentManager"></param>
         public override void LoadContent(ContentManager contentManager)
         {
             Texture2D backgroundTexture = contentManager.Load<Texture2D>("mainMenuBackground");
@@ -76,7 +86,7 @@ namespace BlockBreaker.GameStates
             {
                 GameServices.GetService<GameStateManager>().Remove("Highscores");
                 GameStateHighscores highscoresGamestate = new GameStateHighscores("Highscores");
-                highscoresGamestate.Initialize();
+                highscoresGamestate.Initialise();
                 highscoresGamestate.LoadContent(contentManager);
                 GameServices.GetService<GameStateManager>().Add(highscoresGamestate);
                 GameServices.GetService<GameStateManager>().SwapState("Highscores");
@@ -88,11 +98,20 @@ namespace BlockBreaker.GameStates
             _guiScreen.AddGui(_quitButton);
         }
 
+        /// <summary>
+        /// Updates the gui.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             _guiScreen.Update();
         }
 
+        /// <summary>
+        /// Draws the gui
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);

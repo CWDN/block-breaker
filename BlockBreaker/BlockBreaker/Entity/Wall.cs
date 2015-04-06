@@ -8,6 +8,10 @@ namespace BlockBreaker.Entity
 {
     public class Wall : BaseEntity
     {
+        /// <summary>
+        /// Returns a list of all the default components that this entity has.
+        /// </summary>
+        /// <returns></returns>
         protected override List<Component> CreateDefaultComponents()
         {
             return new List<Component>

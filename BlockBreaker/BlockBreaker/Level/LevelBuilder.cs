@@ -9,17 +9,43 @@ using Atom.World;
 using BlockBreaker.Entity;
 using BlockBreaker.Entity.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BlockBreaker.Level
 {
     public class LevelBuilder
     {
-        private List<BaseEntity> _entities = new List<BaseEntity>();
-        private List<List<Component>> _components = new List<List<Component>>();
+        /// <summary>
+        /// All the levels that are loaded.
+        /// </summary>
+        protected List<Level> Levels = new List<Level>();
+        protected int currentLevel;
 
+        /// <summary>
+        /// Builds levels from a texture.
+        /// </summary>
+        /// <param name="content"></param>
+        public LevelBuilder(ContentManager content)
+        {
+            Texture2D levelTexture0 = content.Load<Texture2D>("Level00");
+            BuildFromTexture2D(levelTexture0);
+
+            Texture2D levelTexture1 = content.Load<Texture2D>("Level01");
+            BuildFromTexture2D(levelTexture1);
+
+            Texture2D levelTexture2 = content.Load<Texture2D>("Level02");
+            BuildFromTexture2D(levelTexture2);
+        }
+
+        /// <summary>
+        /// Builds a level object from a Texture2D and add it to the Levels.
+        /// </summary>
+        /// <param name="texture"></param>
         public void BuildFromTexture2D(Texture2D texture)
         {
+            Level level = new Level();
+
             float blockWidth = 73 * 0.75F;
             Color[] colourData = new Color[texture.Width * texture.Height];
             texture.GetData(colourData);
@@ -44,11 +70,20 @@ namespace BlockBreaker.Level
 
                 Vector2 position = new Vector2(positionX, positionY);
 
-                BuildBlock(startPosition + position, colour, health);
+                BuildBlock(level, startPosition + position, colour, health);
             }
+
+            Levels.Add(level);
         }
 
-        private void BuildBlock(Vector2 position, Color tint, int health)
+        /// <summary>
+        /// Builds a block entity from the given the parameters.
+        /// </summary>
+        /// <param name="level"></param>
+        /// <param name="position"></param>
+        /// <param name="tint"></param>
+        /// <param name="health"></param>
+        private void BuildBlock(Level level, Vector2 position, Color tint, int health)
         {
             Block block = EntityFactory.GetInstance().Construct<Block>();
 
@@ -68,19 +103,22 @@ namespace BlockBreaker.Level
             healthComponent.Health = health;
             healthComponent.MaxHealth = health;
 
-            _entities.Add(block);
-            _components.Add(components);
+            level.Entities.Add(block);
+            level.Components.Add(components);
         }
 
-        public void LoadIntoWorld(World world)
+        /// <summary>
+        /// Loads the next level in the list.
+        /// If there are no more levels then it will return false.
+        /// </summary>
+        /// <param name="world"></param>
+        /// <returns></returns>
+        public bool LoadNextLevel(World world)
         {
-            for (int index = 0; index < _entities.Count; index++)
-            {
-                BaseEntity entity = _entities[index];
-                List<Component> components = _components[index];
-
-                World.GetInstance().AddEntity(entity, components);
-            }
+            if (currentLevel >= Levels.Count) return false;
+            Levels[currentLevel].LoadIntoWorld(world);
+            currentLevel++;
+            return true;
         }
     }
 }

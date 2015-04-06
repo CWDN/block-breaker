@@ -22,14 +22,13 @@ using BlockBreaker.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace BlockBreaker.GameStates
 {
     public class GameStateInGame : GameState
     {
         private Texture2D _background;
-        private Texture2D _levelTexture;
-        private LevelBuilder _levelBuilder;
         private World _world;
         private GraphicsDeviceManager _graphics;
         private int ScreenWidth;
@@ -43,9 +42,15 @@ namespace BlockBreaker.GameStates
         private GuiLabel _scoreValue;
         private GuiLabel _highScoreTitle;
         private GuiLabel _highScoreValue;
-        private GuiLabel _lostLabel;
+        private GuiLabel _endGameLabel;
         private SpriteFont _font;
 
+        private KeyboardState _previousKeyboardState;
+
+        /// <summary>
+        /// The Game state for the main game.
+        /// </summary>
+        /// <param name="name"></param>
         public GameStateInGame(string name) : base(name)
         {
             _graphics = GameServices.Graphics;
@@ -53,17 +58,14 @@ namespace BlockBreaker.GameStates
             ScreenHeight = GameServices.Graphics.PreferredBackBufferHeight;
         }
 
-
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
+        /// Initalises the main game.
         /// </summary>
-        public override void Initialize()
+        public override void Initialise()
         {
             _world = new World();
 
+            // Registering the entities to the factory.
             EntityFactory.GetInstance().Register<Paddle>();
             EntityFactory.GetInstance().Register<Wall>();
             EntityFactory.GetInstance().Register<Ball>();
@@ -71,6 +73,7 @@ namespace BlockBreaker.GameStates
             EntityFactory.GetInstance().Register<PowerUp>();
             EntityFactory.GetInstance().Register<Laser>();
 
+            // Initialise the gui's.
             _returnButton = new GuiButton(new Vector2(0F, -0.1F), 0.3F, 0.2F) { BackColour = Color.Transparent, Anchor = Anchor.BottomMiddle };
             _container = new GuiContainer(new Vector2(0F, 0F), 1F, 1F) { BackColour = Color.Black, Opacity = 0.5F };
             _window = new GuiContainer(new Vector2(0F, 0F), 0.5F, 0.7F) { BackColour = Color.Transparent, Anchor = Anchor.Middle };
@@ -78,17 +81,14 @@ namespace BlockBreaker.GameStates
             _scoreValue = new GuiLabel(new Vector2(0,0.25F), 0.1F, 0.1F) { BackColour = Color.Transparent, Anchor = Anchor.TopMiddle };
             _highScoreTitle = new GuiLabel(new Vector2(0, 0.1F), 0.1F, 0.1F) { BackColour = Color.Transparent, Anchor = Anchor.Middle };
             _highScoreValue = new GuiLabel(new Vector2(0, 0.4F), 0.1F, 0.1F) { BackColour = Color.Transparent, Anchor = Anchor.Middle };
-            _lostLabel = new GuiLabel(new Vector2(0, 0.01F), 0.1F, 0.1F) { BackColour = Color.Transparent, Anchor = Anchor.TopMiddle };
+            _endGameLabel = new GuiLabel(new Vector2(0, 0.01F), 0.1F, 0.1F) { BackColour = Color.Transparent, Anchor = Anchor.TopMiddle };
             _guiScreen = new GuiScreen(new Point(0, 0), ScreenWidth, ScreenHeight);
 
-            _levelBuilder = new LevelBuilder();
-
-            base.Initialize();
+            base.Initialise();
         }
 
         /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
+        /// Load the main games content.
         /// </summary>
         public override void LoadContent(ContentManager content)
         {
@@ -129,10 +129,10 @@ namespace BlockBreaker.GameStates
             _highScoreValue.Text = "100";
             _highScoreValue.FontScale = 1.4F;
 
-            _lostLabel.Font = _font;
-            _lostLabel.FontColour = Color.Red;
-            _lostLabel.Text = "You ran out of lives";
-            _lostLabel.FontScale = 1.9F;
+            _endGameLabel.Font = _font;
+            _endGameLabel.FontColour = Color.Red;
+            _endGameLabel.Text = "You ran out of lives";
+            _endGameLabel.FontScale = 1.9F;
 
             Texture2D windowTexture = content.Load<Texture2D>("windowBackground");
             _window.Texture = windowTexture;
@@ -143,25 +143,33 @@ namespace BlockBreaker.GameStates
             _window.AddGui(_highScoreTitle);
             _window.AddGui(_highScoreValue);
             _container.AddGui(_window);   
-            _container.AddGui(_lostLabel);
+            _container.AddGui(_endGameLabel);
             _guiScreen.AddGui(_container);
         }
 
+        /// <summary>
+        /// Helper function to build the world.
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="world"></param>
+        /// <returns></returns>
         public World BuildWorld(ContentManager content, World world)
         {
-            _levelBuilder = new LevelBuilder();
+            GameServices.RemoveService<LevelBuilder>();
+            LevelBuilder levelBuilder = new LevelBuilder(content);
+            GameServices.AddService(levelBuilder);
+
             PostOffice.NewInstance();
             _background = content.Load<Texture2D>("Background");
-            _levelTexture = content.Load<Texture2D>("Level01");
 
-            _levelBuilder.BuildFromTexture2D(_levelTexture);
-
+            // Constructs the entities.
             Paddle paddle = EntityFactory.GetInstance().Construct<Paddle>();
             Wall leftWall = EntityFactory.GetInstance().Construct<Wall>();
             Wall rightWall = EntityFactory.GetInstance().Construct<Wall>();
             Wall topWall = EntityFactory.GetInstance().Construct<Wall>();
             Ball ball = EntityFactory.GetInstance().Construct<Ball>();
 
+            // Set ups the 3 walls - Top, Let and Right.
             List<Component> rightWallComponents = rightWall.GetDefaultComponents();
 
             PositionComponent rightWallPositionComponent = (PositionComponent)rightWallComponents.Find(component =>
@@ -185,6 +193,7 @@ namespace BlockBreaker.GameStates
             topWallPositionComponent.Y -= topWallBoundingBoxComponent.Height;
             topWallBoundingBoxComponent.Width = _graphics.PreferredBackBufferWidth;
 
+            // Loads all the systems
             world.AddSystem(new StaticRenderSystem());
             world.AddSystem(new AnimatedRenderSystem());
             world.AddSystem(new MovementSystem());
@@ -200,44 +209,72 @@ namespace BlockBreaker.GameStates
             world.AddSystem(new GravitySystem());
             world.AddSystem(new PowerUpSystem());
             world.AddSystem(new SpawnLaserSystem());
-            world.AddSystem(new LifeCheckerSystem());
+            world.AddSystem(new EndGameSystem());
             world.AddSystem(new ScoreSystem());
             world.AddSystem(new AudioSystem());
 
+            // Loads the entities.
             world.AddEntity(ball, ball.GetDefaultComponents());
             world.AddEntity(paddle, paddle.GetDefaultComponents());
             world.AddEntity(leftWall, leftWall.GetDefaultComponents());
             world.AddEntity(rightWall, rightWallComponents);
             world.AddEntity(topWall, topWallComponents);
-            _levelBuilder.LoadIntoWorld(world);
+            GameServices.GetService<LevelBuilder>().LoadNextLevel(world);
 
             ScoreSystem.Score = 0;
-            LifeCheckerSystem.Finished = false;
+            EndGameSystem.Finished = EndGameReason.None;
 
             return world;
         }
 
         /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
+        /// Updates the world logic plus all the systems that have been registered.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
             _world.Update(gameTime);
 
-            if (LifeCheckerSystem.Finished)
+            // If the game has finished then starting updating the end screen gui.
+            if (EndGameSystem.Finished != EndGameReason.None)
             {
                 _guiScreen.Update();
                 _scoreValue.Text = ScoreSystem.Score.ToString();
                 _highScoreValue.Text = HighscoreManager.GetInstance().GetHighestScore().ToString();
+
+                switch (EndGameSystem.Finished)
+                {
+                    case EndGameReason.None:
+                    case EndGameReason.RanOutOfLives:
+                        _endGameLabel.Text = "You ran out of lives";
+                        _endGameLabel.FontColour = Color.Red;
+                        break;
+                    case EndGameReason.AllLevelsBeat:
+                        _endGameLabel.Text = "You beat all levels";
+                        _endGameLabel.FontColour = Color.CornflowerBlue;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else
+            {
+                // If the P key is pressed then pause the world.
+                KeyboardState keyboardState = Keyboard.GetState();
+
+                if (_previousKeyboardState.IsKeyUp(Keys.P) && keyboardState.IsKeyDown(Keys.P))
+                {
+                    _world.Paused = !_world.Paused;
+                }
+
+                _previousKeyboardState = keyboardState;
             }
 
             base.Update(gameTime);
         }
 
         /// <summary>
-        /// This is called when the game should draw itself.
+        /// Draws the world and the end screen.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         /// <param name="spriteBatch"></param>
@@ -253,7 +290,7 @@ namespace BlockBreaker.GameStates
 
             spriteBatch.Begin();
 
-            if (LifeCheckerSystem.Finished)
+            if (EndGameSystem.Finished != EndGameReason.None)
             {
                 _guiScreen.Draw(spriteBatch);
             }

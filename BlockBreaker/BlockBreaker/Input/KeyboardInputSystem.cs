@@ -18,10 +18,15 @@ namespace BlockBreaker.Input
 {
     public class KeyboardInputSystem : BaseSystem
     {
-
+        /// <summary>
+        /// Stores the previous update keyboar state.
+        /// </summary>
         private KeyboardState _previousKeyboardState;
         private double coolDownTime;
 
+        /// <summary>
+        /// Manages the keyboard input for the entities.
+        /// </summary>
         public KeyboardInputSystem()
         {
             ComponentTypeFilter = new TypeFilter()
@@ -33,6 +38,11 @@ namespace BlockBreaker.Input
                 .AddFilter(typeof (AmmoComponent));
         }
 
+        /// <summary>
+        /// Update function that checks what keys have been pressed.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="entityId"></param>
         public override void Update(GameTime gameTime, int entityId)
         {
             KeyboardState keyboardState = Keyboard.GetState();
@@ -54,6 +64,9 @@ namespace BlockBreaker.Input
 
                 Random random = new Random();
 
+                /**
+                 * The keyboard inputs for the ball
+                 */
                 if (entity is Ball)
                 {
                     switch (actions)
@@ -78,6 +91,9 @@ namespace BlockBreaker.Input
                     }
                 }
 
+                /**
+                 * Keyboard inputs for the paddle.
+                 */
                 if (entity is Paddle)
                 {
                     PowerUpComponent powerUpComponent = GetComponentsByEntityId<PowerUpComponent>(entity.Id).FirstOrDefault();
@@ -103,7 +119,7 @@ namespace BlockBreaker.Input
 
                                 coolDownTime = 5;
 
-                                if (ammoComponent.AmmoCapacity > 2)
+                                if (ammoComponent.AmmoCapacity >= 2)
                                 {
                                     ammoComponent.AmmoCapacity -= 2;
 
@@ -117,10 +133,6 @@ namespace BlockBreaker.Input
                                 }
                             }
 
-                            break;
-                        case PowerUps.MultiBall:
-                            break;
-                        case PowerUps.LargerPaddle:
                             break;
                     }
                 }
